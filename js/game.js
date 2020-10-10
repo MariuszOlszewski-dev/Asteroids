@@ -22,12 +22,25 @@ Game = {
     layout:function(ev){
         VAR.W = window.innerWidth;
         VAR.W = window.innerHeight;
-    //dopasownie elementów do wielkości okna (dodanie elem odniesienie czyli zawsze krótszego boku)
+        //dopasownie elementów do wielkości okna (dodanie elem odniesienie czyli zawsze krótszego boku)
         VAR.d = Math.min(VAR.W, VAR.H);
-    //
+        //
         Game.canvas.width = VAR.W;
         Game.canvas.height = VAR.H;
-    //Za każdym razem jak zmieniamy wielkosć canvas to wszystko co ustawialiśmy(wypełnienie itp) w canvas zawsze sie resetuje.
-    Game.ctx.fillStyle = 'white';
+        //Za każdym razem jak zmieniamy wielkosć canvas to wszystko co ustawialiśmy(wypełnienie itp) w canvas zawsze sie resetuje. Aby nie definiować ustawień za każdym razem, definiujemy je w funkcji layout.
+        Game.ctx.fillStyle = 'white';
+        Game.ctx.strokeStyle = 'white';
+        Game.ctx.lineWidth = 3;
+        Game.ctx.lineJoin = 'round';
+    },
+    animationLoop:function(time){
+        requestAnimationFrame(Game.animationLoop);
+        if(time-VAR.lastTime>=1000/VAR.fps){
+            VAR.lastTime=time;
+
+            Game.ctx.clearRect(0,0,VAR.W,VAR.H);
+        }
+    }
+
 
 }
