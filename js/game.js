@@ -15,13 +15,17 @@ Game = {
     init:function(){
         Game.canvas = document.createElement('canvas');
         Game.ctx = Game.canvas.getContext('2d');
+        Game.layout();
+
+        window.addEventListener('resize', Game.layout, false);
 
         document.body.appendChild(Game.canvas);
+        Game.animationLoop()
     },
     //Ustawienie wielkości okna
     layout:function(ev){
         VAR.W = window.innerWidth;
-        VAR.W = window.innerHeight;
+        VAR.H = window.innerHeight;
         //dopasownie elementów do wielkości okna (dodanie elem odniesienie czyli zawsze krótszego boku)
         VAR.d = Math.min(VAR.W, VAR.H);
         //
