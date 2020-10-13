@@ -9,6 +9,12 @@ function Ship(){
     this.points=[{},{},{}];
 }
 Ship.prototype.draw = function(){
+    
+    if(Game.key_37 || Game.key_39){
+        this.a=this.a+7*(Game.key_37 ? -1 : 1);
+    }
+    
+    
     Game.ctx.beginPath();
     for(var i=0; i<3; i++)
     {
