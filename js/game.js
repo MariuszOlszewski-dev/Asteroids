@@ -20,6 +20,9 @@ Game = {
         window.addEventListener('resize', Game.layout, false);
 
         document.body.appendChild(Game.canvas);
+
+        Game.ship = new Ship();
+
         Game.animationLoop();
     },
     //Ustawienie wielkości okna
@@ -42,6 +45,9 @@ Game = {
         if(time-VAR.lastTime>=1000/VAR.fps){
             VAR.lastTime=time;
             Game.ctx.clearRect(0,0,VAR.W,VAR.H);
+
+            //
+            Game.ship.drow();
         }
     }
 
