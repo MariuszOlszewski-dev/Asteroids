@@ -6,20 +6,21 @@ function Ship(){
     this.x = VAR.W/2;
     this.y = VAR.H/2;
     //
-    this.points = [ {}, {}, {} ]
+    this.points=[{},{},{}];
 }
 Ship.prototype.draw = function(){
-    Game.ctx.beginPatch();
-    for(i=0; i<3; i++)
+    Game.ctx.beginPath();
+    for(var i=0; i<3; i++)
     {
         this.tmp_a= i===0 ? this.a : (this.a+180+(i==1 ? this.rear_a : -this.rear_a) );
-        this.points[i].x=Math.sin(Math.PI/180*this.tmp_a)*this.r*VAR.d+this.x;
-        this.points[i].y=Math.cos(Math.PI/180*this.tmp_a)*this.r*VAR.d+this.y;
+        
+        this.tmp_r= i===0 ? this.r : this.r*0.6;
+
+        this.points[i].x=Math.sin(Math.PI/180*this.tmp_a)*this.tmp_r*VAR.d+this.x;
+        this.points[i].y=-Math.cos(Math.PI/180*this.tmp_a)*this.tmp_r*VAR.d+this.y;
         //narysowanie
-        Game.ctx[i===0 ? 'moveTo' : 'lineTo'](this.points[i].x, thispoints[i].y)
+        Game.ctx[i===0 ? 'moveTo' : 'lineTo'](this.points[i].x, this.points[i].y);
     }
+    Game.ctx.closePath();
     Game.ctx.stroke();
-
-
-
-}
+};

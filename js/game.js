@@ -31,7 +31,7 @@ Game = {
         VAR.H = window.innerHeight;
         //dopasownie elementów do wielkości okna (dodanie elem odniesienie czyli zawsze krótszego boku)
         VAR.d = Math.min(VAR.W, VAR.H);
-        //
+        //Update wilkości Canvas
         Game.canvas.width = VAR.W;
         Game.canvas.height = VAR.H;
         //Za każdym razem jak zmieniamy wielkosć canvas to wszystko co ustawialiśmy(wypełnienie itp) w canvas zawsze sie resetuje. Aby nie definiować ustawień za każdym razem, definiujemy je w funkcji layout.
@@ -45,9 +45,10 @@ Game = {
         if(time-VAR.lastTime>=1000/VAR.fps){
             VAR.lastTime=time;
             Game.ctx.clearRect(0,0,VAR.W,VAR.H);
+            //rysowanie statku
+            Game.ship.draw();
+            console.log('draw');
 
-            //
-            Game.ship.drow();
         }
     }
 
