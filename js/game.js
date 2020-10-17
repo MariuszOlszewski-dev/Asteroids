@@ -14,11 +14,13 @@ VAR = {
 Game = {
     init:function(){
         Game.canvas = document.createElement('canvas');
+        Game.hit_canvas = document.createElement('canvas');
         Game.ctx = Game.canvas.getContext('2d');
+        Game.hit_ctx = Game.hit_canvas.getContext('2d');
         Game.layout();
 
         window.addEventListener('resize', Game.layout, false);
-
+        
         document.body.appendChild(Game.canvas);
 
         for(i=0; i<4; i++){
@@ -30,7 +32,14 @@ Game = {
         window.addEventListener('keydown',Game.onKey, false);
         window.addEventListener('keyup',Game.onKey, false);
 
+        
+
         Game.animationLoop();
+    },
+
+    stop: function(){
+        window.removeEventListener('keydown',Game.onKey, false);
+        window.removeEventListener('keyup',Game.onKey, false);
     },
     onKey: function(ev){
         if(ev.keyCode==32 || ev.keyCode==37 || ev.keyCode==38 || ev.keyCode==39){
@@ -62,6 +71,10 @@ Game = {
         //Update wilkości Canvas
         Game.canvas.width = VAR.W;
         Game.canvas.height = VAR.H;
+
+        Game.hit_canvas.width = VAR.W;
+        Game.hit_canvas.height = VAR.H;
+        Game.hit_ctx.fillStyle='red';
         //Za każdym razem jak zmieniamy wielkosć canvas to wszystko co ustawialiśmy(wypełnienie itp) w canvas zawsze sie resetuje. Aby nie definiować ustawień za każdym razem, definiujemy je w funkcji layout.
         Game.ctx.fillStyle = 'white';
         Game.ctx.strokeStyle = 'white';
@@ -73,10 +86,13 @@ Game = {
         if(time-VAR.lastTime>=1000/VAR.fps){
             VAR.lastTime=time;
             Game.ctx.clearRect(0,0,VAR.W,VAR.H);
+
             //rysowanie statku
             Game.ship.draw();
-            Bullet.draw();
+            
             Rock.draw();
+
+            Bullet.draw();
 
         }
     }
