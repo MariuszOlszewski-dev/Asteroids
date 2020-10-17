@@ -21,6 +21,10 @@ Game = {
 
         document.body.appendChild(Game.canvas);
 
+        for(i=0; i<4; i++){
+            new Rock();
+        }
+
         Game.ship = new Ship();
 
         window.addEventListener('keydown',Game.onKey, false);
@@ -72,6 +76,7 @@ Game = {
             //rysowanie statku
             Game.ship.draw();
             Bullet.draw();
+            Rock.draw();
 
         }
     }
