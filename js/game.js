@@ -39,6 +39,9 @@ Game = {
                 else if(ev.keyCode==39){
                     Game.key_37=false;
                 }
+                else if(ev.keyCode==32){
+                    new Bullet();
+                }
             }
             else if(ev.type=='keyup'){
                 Game['key_'+ev.keyCode]=false;            
@@ -68,7 +71,7 @@ Game = {
             Game.ctx.clearRect(0,0,VAR.W,VAR.H);
             //rysowanie statku
             Game.ship.draw();
-            console.log('draw');
+            Bullet.draw();
 
         }
     }
